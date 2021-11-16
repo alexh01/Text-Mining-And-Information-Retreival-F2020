@@ -1,0 +1,35 @@
+PUT /index_name
+{
+    "settings":{
+        "analysis":{
+            "analyzer":{
+                "my_analyzer":{
+                    "tokenizer": "whitespace",
+                    "filter": [
+                        "lowercase",
+                        "porter_stem"
+                    ]
+                }
+            }
+        }
+    },
+    "mappings": {
+        "properties": {
+            "title": {
+                "type":"text",
+                "analyzer":"my_analyzer",
+                "similarity": "BM25"
+            },
+            "body": {
+                "type":"text",
+                "analyzer":"my_analyzer",
+                "similarity": "BM25"
+            },
+            "answer": {
+                "type":"text",
+                "analyzer":"my_analyzer",
+                "similarity": "BM25"
+            }
+        }
+    }
+}
