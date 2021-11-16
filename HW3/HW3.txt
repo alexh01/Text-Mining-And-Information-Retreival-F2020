@@ -1,0 +1,61 @@
+ In class, we learned that PLSA considers the following generative process:
+
+For each document d:
+For each token position i
+Choose a topic z ∼ Multinomial(    theta_d   ) 
+Choose a term w ∼ Multinomial(    phi_z   )
+where theta_d is the document-topic vector of document d, whose length is the number of topics. Because we have 2 topics here, theta_d's length is 2.
+
+phi_z is the topic-word vector for topic z (z=0 or 1), whose length is 8 (because there are 8 words). 
+
+ 
+
+The PLSA model assumes we do not know the topic of any document beforehand. If, however, we know the topic labels of a subset of documents, it can help us improve the prediction of topics on the other unlabelled documents. In this homework, you are given 10100 documents, where 100 are labelled and the other 10000 are unlabelled. Your will be predicting the topics of 10000 documents using PLSA, with the help of the 100 labeled documents. Download the following dataset containing 10100 documents, where the first 100 documents are labelled, and the other 10000 documents are unlabelled:
+
+https://stevens0-my.sharepoint.com/:t:/g/personal/xliu127_stevens_edu/EVUKuOU4Ei1BiLtzKJS2McMB0QUACSeCGTJVzHY4U-C_FA?e=k9zHo6
+
+ 
+
+Each document in the above file comes from 1 of two topics: Java (topic 0) and Python (topic 1). The vocabulary set contains 8 words: import, class, arraylist, hashset, hashmap, lambda, def, elif. Our prior knowledge tells us that import and class are shared by the two topics; hashset, hashmap and arraylist belong to the Java topic whereas lambda, def and elif belong to the Python topic. 
+
+ 
+
+(1) Derive the E step and M step formulation by considering the 100 labeled documents in PLSA. That is, in the E step, you need to estimate the hidden variable using Bayesian theorem; in the M step, you need to estimate the document-topic vectors and the topic-word vectors by maximizing the Q function
+
+ 
+
+(2) Implement your Python code for the EM algorithm, report the following variables:
+
+ 
+
+1. the estimated topic-word distribution. For each topic, report the sorted  probabilities in descending order p(word|topic) for all the 8 words, e.g., if p("import"|Java) =0.6, p("class"|Java) = 0.4, p(*|Java) = 0 for other words, you need to output the following list for Java:
+
+p("import"|Java): 0.6
+
+p("class"|Java): 0.4
+
+p("hashset"| Java): 0
+
+...
+
+ 
+
+2. For each of the 10000 document, use the estimated document-topic distribution to predict the topic label by setting a threshold of 0.5. Output the document-topic vector for each document, and predict the topic of each. For example, if document 1 has the following document-topic distribution: p(Java|document1) = 0.6, p("Java"|document1) = 0.4, then the topic prediction of document 1 is Java. Output the document-topic vector as the following list:
+
+ 
+
+p(Java|document0) = 0.83, topic = Java
+
+p(Java|document1) = 0.23, topic = Python
+
+p(Java|document2) = 0.3, topic = Python
+
+...
+
+ 
+
+Submission Instruction
+
+1. Report (1) the EM derivation, (2) the topic-word vectors of the two topics; (3) the document-topic vector of the first 20 documents in your report;
+
+2. Upload (1) your implementation for the EM algorithm (2) the complete document-topic vectors of the 10000 documents; 
